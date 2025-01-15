@@ -1,0 +1,23 @@
+const int button = 2;
+const int relayb = 8;
+int buttonState = 0;
+int lastButtonState = 0;
+bool lampState = false;
+void setup() {
+  pinMode(button, INPUT_PULLUP);
+  pinMode(relayb, OUTPUT);
+  digitalWrite(relayb, LOW);
+}
+void loop() {
+  buttonState = digitalRead(button);
+  if (buttonState == LOW && lastButtonState == HIGH) {
+    lampState = !lampState;    
+    if (lampState) {
+      digitalWrite(relayb,HIGH);
+    } else {
+      digitalWrite(relayb, LOW);
+    }
+    delay(50)
+  }
+  lastButtonState = buttonState;
+}
